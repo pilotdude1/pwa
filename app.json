@@ -1,0 +1,26 @@
+{
+  "name": "sass-factory2",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "NPM_CONFIG_PRODUCTION": "false",
+    "NPM_CONFIG_LOGLEVEL": "error",
+    "NODE_VERBOSE": "false",
+    "NODE_MODULES_CACHE": "true",
+    "VITE_BUILD_MINIFY": "false",
+    "NPM_CONFIG_LEGACY_PEER_DEPS": "true",
+    "NPM_CONFIG_STRICT_PEER_DEPENDENCIES": "false",
+    "NPM_CONFIG_AUTO_INSTALL_PEERS": "true",
+    "PATH": "/app/node_modules/.bin:$PATH"
+  },
+  "scripts": {
+    "start": "node build/index.js"
+  },
+  "build": {
+    "command": "chmod +x build.sh && ./build.sh"
+  }
+} 
