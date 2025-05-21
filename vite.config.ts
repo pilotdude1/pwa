@@ -1,8 +1,66 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [
+		sveltekit(),
+		VitePWA({
+			strategies: 'generateSW',
+			registerType: 'autoUpdate',
+			devOptions: {
+				enabled: true
+			},
+			manifest: {
+				name: 'PWA App',
+				short_name: 'PWA',
+				description: 'A Progressive Web App with Supabase integration',
+				theme_color: '#000000',
+				orientation: 'portrait',
+				display: 'standalone',
+				background_color: '#ffffff',
+				start_url: '/',
+				scope: '/',
+				icons: [
+					{
+						src: '/icons/icon-192x192.png',
+						sizes: '192x192',
+						type: 'image/png',
+						purpose: 'any maskable'
+					},
+					{
+						src: '/icons/icon-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'any maskable'
+					}
+				],
+				screenshots: [
+					{
+						src: '/screenshots/desktop.png',
+						sizes: '1280x720',
+						type: 'image/png',
+						form_factor: 'wide',
+						label: 'Desktop view of PWA App'
+					},
+					{
+						src: '/screenshots/mobile.png',
+						sizes: '750x1334',
+						type: 'image/png',
+						form_factor: 'narrow',
+						label: 'Mobile view of PWA App'
+					}
+				]
+			},
+			includeAssets: ['favicon.ico', 'robots.txt', 'icons/*', 'screenshots/*'],
+			workbox: {
+				cleanupOutdatedCaches: true,
+				sourcemap: true,
+				clientsClaim: true,
+				skipWaiting: true
+			}
+		})
+	],
 	server: {
 		host: '0.0.0.0',
 		port: 3000,

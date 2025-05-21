@@ -4,9 +4,25 @@
   import { expoOut } from "svelte/easing"
   import { slide } from "svelte/transition"
   import Banner from "$lib/components/Banner.svelte"
+  import { onMount } from "svelte"
+  import { registerServiceWorker } from "$lib/registerSW"
 
   export const children: import("svelte").Snippet = undefined
+
+  onMount(() => {
+    registerServiceWorker()
+  })
 </script>
+
+<svelte:head>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#000000" />
+  <meta
+    name="description"
+    content="A Progressive Web App with Supabase integration"
+  />
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+</svelte:head>
 
 <div
   class="relative border-2 border-dashed border-primary/50 rounded-lg p-4 m-4"

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Screenshot</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 750px;
+            height: 1334px;
+            background: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .container {
+            padding: 1rem;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .header {
+            background: #000000;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            position: sticky;
+            top: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .card {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            background: #000000;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            position: sticky;
+            bottom: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PWA App</h1>
+        </div>
+        <div class="content">
+            <div class="card">
+                <h2>Feature 1</h2>
+                <p>Description of the first main feature of your PWA.</p>
+            </div>
+            <div class="card">
+                <h2>Feature 2</h2>
+                <p>Description of the second main feature of your PWA.</p>
+            </div>
+            <div class="card">
+                <h2>Feature 3</h2>
+                <p>Description of the third main feature of your PWA.</p>
+            </div>
+        </div>
+        <div class="nav">
+            <div class="nav-item">Home</div>
+            <div class="nav-item">Features</div>
+            <div class="nav-item">Settings</div>
+        </div>
+    </div>
+</body>
+
+</html>
