@@ -11,48 +11,8 @@ export default defineConfig({
 			devOptions: {
 				enabled: true
 			},
-			manifest: {
-				name: 'PWA App',
-				short_name: 'PWA',
-				description: 'A Progressive Web App with Supabase integration',
-				theme_color: '#000000',
-				orientation: 'portrait',
-				display: 'standalone',
-				background_color: '#ffffff',
-				start_url: '/',
-				scope: '/',
-				icons: [
-					{
-						src: '/icons/icon-192x192.png',
-						sizes: '192x192',
-						type: 'image/png',
-						purpose: 'any maskable'
-					},
-					{
-						src: '/icons/icon-512x512.png',
-						sizes: '512x512',
-						type: 'image/png',
-						purpose: 'any maskable'
-					}
-				],
-				screenshots: [
-					{
-						src: '/screenshots/desktop.png',
-						sizes: '1280x720',
-						type: 'image/png',
-						form_factor: 'wide',
-						label: 'Desktop view of PWA App'
-					},
-					{
-						src: '/screenshots/mobile.png',
-						sizes: '750x1334',
-						type: 'image/png',
-						form_factor: 'narrow',
-						label: 'Mobile view of PWA App'
-					}
-				]
-			},
-			includeAssets: ['favicon.ico', 'robots.txt', 'icons/*', 'screenshots/*', 'manifest.json'],
+			manifest: false,
+			includeAssets: ['favicon.ico', 'robots.txt', 'icons/*', 'screenshots/*', 'manifest.webmanifest'],
 			workbox: {
 				cleanupOutdatedCaches: true,
 				sourcemap: true,
@@ -67,7 +27,7 @@ export default defineConfig({
 							cacheName: 'google-fonts-cache',
 							expiration: {
 								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+								maxAgeSeconds: 60 * 60 * 24 * 365
 							},
 							cacheableResponse: {
 								statuses: [0, 200]
@@ -81,7 +41,7 @@ export default defineConfig({
 							cacheName: 'gstatic-fonts-cache',
 							expiration: {
 								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+								maxAgeSeconds: 60 * 60 * 24 * 365
 							},
 							cacheableResponse: {
 								statuses: [0, 200]
