@@ -11,7 +11,7 @@
 		"clean": "rm -rf .svelte-kit build node_modules/.vite",
 		"prepare": "svelte-kit sync",
 		"prebuild": "npm run clean",
-		"build": "vite build && node scripts/postbuild.js",
+		"build": "vite build --mode production && node scripts/postbuild.js",
 		"start": "node build/index.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
