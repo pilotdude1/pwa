@@ -1,21 +1,32 @@
-FROM node:20-alpine
+FROM node:18.19.0-alpine as builder
 
 WORKDIR /app
 
-# Copy package files
+# Install dependencies
 COPY package*.json ./
-
-# Install dependencies with legacy peer deps
 RUN npm install --legacy-peer-deps
 
-# Copy source code
+# Copy source
 COPY . .
 
-# Run prepare script to ensure all dependencies are properly set up
-RUN npm run prepare
+# Build the app
+RUN npm run build
 
-# Expose the port the app runs on
+# Production image
+FROM node:18.19.0-alpine
+
+WORKDIR /app
+
+# Copy built assets from builder
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/static ./static
+
+# Install production dependencies only
+RUN npm install --production --legacy-peer-deps
+
+# Expose port
 EXPOSE 3000
 
-# Start the development server
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "3000"] 
+# Start the app
+CMD ["npm", "run", "start"] 
