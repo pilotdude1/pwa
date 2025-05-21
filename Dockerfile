@@ -43,8 +43,9 @@ COPY --from=builder /app/build ./build
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/static ./static
 
-# Install production dependencies only
-RUN npm install --production --legacy-peer-deps
+# Install production dependencies and required dev dependencies
+RUN npm install --legacy-peer-deps && \
+    npm install --save-dev @sveltejs/kit --legacy-peer-deps
 
 # Expose port
 EXPOSE 3000
