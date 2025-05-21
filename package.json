@@ -21,7 +21,8 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"format_check": "prettier --check --plugin prettier-plugin-svelte ./src",
-		"postinstall": "svelte-kit sync"
+		"postinstall": "svelte-kit sync",
+		"generate-icons": "node scripts/generate-icons.js"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
