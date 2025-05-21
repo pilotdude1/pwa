@@ -19,14 +19,13 @@ async function generateIcons() {
       <!-- Background -->
       <rect width="512" height="512" fill="#000000"/>
       
-      <!-- Safe zone (10% padding) -->
-      <rect x="51.2" y="51.2" width="409.6" height="409.6" fill="none" stroke="#ffffff" stroke-width="2"/>
-      
       <!-- Main content (centered in safe zone) -->
       <g transform="translate(256, 256)">
-        <!-- Example: Simple PWA logo -->
+        <!-- Modern PWA logo -->
         <circle cx="0" cy="0" r="153.6" fill="#ffffff"/>
-        <text x="0" y="0" font-family="Arial" font-size="120" fill="#000000" text-anchor="middle" dominant-baseline="middle">PWA</text>
+        <path d="M-60,-20 L60,-20 L60,20 L-60,20 Z" fill="#000000"/>
+        <path d="M-40,0 L40,0" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+        <path d="M0,-40 L0,40" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
       </g>
     </svg>
   `;
@@ -35,24 +34,29 @@ async function generateIcons() {
   const tempSvgPath = join(__dirname, '../static/icons/temp-icon.svg');
   await fs.writeFile(tempSvgPath, svgContent);
 
-  // Load the SVG
-  await page.goto(`file:${tempSvgPath}`);
+  try {
+    // Load the SVG
+    await page.goto(`file:${tempSvgPath}`);
 
-  // Generate different sizes
-  const sizes = [192, 512];
-  for (const size of sizes) {
-    // Take screenshot
-    const screenshot = await page.screenshot({
-      path: join(__dirname, `../static/icons/icon-${size}x${size}.png`),
-      omitBackground: true
-    });
+    // Generate different sizes
+    const sizes = [192, 512];
+    for (const size of sizes) {
+      // Take screenshot
+      await page.screenshot({
+        path: join(__dirname, `../static/icons/icon-${size}x${size}.png`),
+        omitBackground: true,
+        type: 'png'
+      });
+    }
+
+    console.log('Icons generated successfully!');
+  } catch (error) {
+    console.error('Error generating icons:', error);
+  } finally {
+    // Clean up
+    await fs.unlink(tempSvgPath).catch(() => {});
+    await browser.close();
   }
-
-  // Clean up
-  await fs.unlink(tempSvgPath);
-  await browser.close();
-
-  console.log('Icons generated successfully!');
 }
 
 generateIcons().catch(console.error); 

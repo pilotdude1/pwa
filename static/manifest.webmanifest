@@ -36,12 +36,12 @@
   "screenshots": [
     {
       "src": "/screenshots/desktop.png",
-      "sizes": "1280x720",
+      "sizes": "1920x1080",
       "type": "image/png"
     },
     {
       "src": "/screenshots/mobile.png",
-      "sizes": "750x1334",
+      "sizes": "390x844",
       "type": "image/png"
     }
   ],

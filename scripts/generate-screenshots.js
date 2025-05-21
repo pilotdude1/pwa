@@ -9,17 +9,35 @@ async function generateScreenshots() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  // Generate desktop screenshot
-  await page.goto(`file:${join(__dirname, '../static/screenshots/desktop.html')}`);
-  await page.setViewport({ width: 1280, height: 720 });
-  await page.screenshot({ path: join(__dirname, '../static/screenshots/desktop.png') });
+  try {
+    // Start the dev server
+    console.log('Starting dev server...');
+    // Note: You'll need to start the dev server separately before running this script
+    const baseUrl = 'http://localhost:3000';
 
-  // Generate mobile screenshot
-  await page.goto(`file:${join(__dirname, '../static/screenshots/mobile.html')}`);
-  await page.setViewport({ width: 750, height: 1334 });
-  await page.screenshot({ path: join(__dirname, '../static/screenshots/mobile.png') });
+    // Generate desktop screenshot (1920x1080 - modern desktop)
+    console.log('Generating desktop screenshot...');
+    await page.goto(baseUrl);
+    await page.setViewport({ width: 1920, height: 1080 });
+    await page.screenshot({ 
+      path: join(__dirname, '../static/screenshots/desktop.png'),
+      fullPage: true
+    });
 
-  await browser.close();
+    // Generate mobile screenshot (390x844 - iPhone 12/13/14)
+    console.log('Generating mobile screenshot...');
+    await page.setViewport({ width: 390, height: 844 });
+    await page.screenshot({ 
+      path: join(__dirname, '../static/screenshots/mobile.png'),
+      fullPage: true
+    });
+
+    console.log('Screenshots generated successfully!');
+  } catch (error) {
+    console.error('Error generating screenshots:', error);
+  } finally {
+    await browser.close();
+  }
 }
 
 generateScreenshots().catch(console.error); 
