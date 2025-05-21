@@ -25,16 +25,12 @@
     {
       "src": "/screenshots/desktop.png",
       "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Desktop view of PWA App"
+      "type": "image/png"
     },
     {
       "src": "/screenshots/mobile.png",
       "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Mobile view of PWA App"
+      "type": "image/png"
     }
   ],
   "shortcuts": [
@@ -44,12 +40,6 @@
       "description": "View your dashboard",
       "url": "/dashboard",
       "icons": [{ "src": "/icons/dashboard.png", "sizes": "192x192" }]
-    }
-  ],
-  "protocol_handlers": [
-    {
-      "protocol": "web+pwa",
-      "url": "/?protocol=%s"
     }
   ]
 } 

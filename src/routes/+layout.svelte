@@ -5,12 +5,21 @@
   import { slide } from "svelte/transition"
   import Banner from "$lib/components/Banner.svelte"
   import { onMount } from "svelte"
-  import { registerServiceWorker } from "$lib/registerSW"
+  import { registerSW } from "virtual:pwa-register"
 
   export const children: import("svelte").Snippet = undefined
 
   onMount(() => {
-    registerServiceWorker()
+    const updateSW = registerSW({
+      onNeedRefresh() {
+        if (confirm("New content available. Reload?")) {
+          updateSW()
+        }
+      },
+      onOfflineReady() {
+        console.log("App ready to work offline")
+      },
+    })
   })
 </script>
 
