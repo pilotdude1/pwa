@@ -41,10 +41,8 @@ export default defineConfig({
       },
 
       workbox: {
-        globDirectory: 'static',
-        globPatterns: [
-          '**/*.{js,mjs,css,html,ico,png,svg,json}'
-        ],
+        globDirectory: 'dev-dist',
+        globPatterns: ['**/*.{js,mjs,css,html,ico,png,svg,json}'],
         globIgnores: [
           '**/node_modules/**/*',
           '**/sw.js',
