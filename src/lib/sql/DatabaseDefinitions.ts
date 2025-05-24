@@ -101,6 +101,61 @@ export interface Database {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          id: string
+          created_at: string
+          updated_at: string | null
+          user_id: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          status: string
+          plan_id: string
+          current_period_start: string | null
+          current_period_end: string | null
+          cancel_at_period_end: boolean
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          updated_at?: string | null
+          user_id: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          status: string
+          plan_id: string
+          current_period_start?: string | null
+          current_period_end?: string | null
+          cancel_at_period_end?: boolean
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          updated_at?: string | null
+          user_id?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          status?: string
+          plan_id?: string
+          current_period_start?: string | null
+          current_period_end?: string | null
+          cancel_at_period_end?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "subscriptions_stripe_customer_id_fkey"
+            columns: ["stripe_customer_id"]
+            referencedRelation: "stripe_customers"
+            referencedColumns: ["stripe_customer_id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
