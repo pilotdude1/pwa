@@ -7,17 +7,24 @@
   import logo from "$lib/images/logo.png"
 
   export let data
+  let { supabase } = data
 
   onMount(() => {
-    supabase.auth.onAuthStateChange((event) => {
+    supabase.auth.onAuthStateChange(async (event: string) => {
       // Redirect to dashboard after sucessful login
       if (event == "SIGNED_IN") {
-        // Delay needed because order of callback not guaranteed.
-        // Give the layout callback priority to update state or
-        // we'll just bounch back to login when /dashboard tries to load
-        setTimeout(() => {
-          goto("/dashboard")
-        }, 1)
+        // Verify user is authenticated with server
+        const {
+          data: { user },
+        } = await supabase.auth.getUser()
+        if (user) {
+          // Delay needed because order of callback not guaranteed.
+          // Give the layout callback priority to update state or
+          // we'll just bounch back to login when /dashboard tries to load
+          setTimeout(() => {
+            goto("/dashboard")
+          }, 1)
+        }
       }
     })
   })

@@ -15,12 +15,12 @@ export const load = async ({ fetch, data, depends, url }) => {
   )
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession()
+    data: { user },
+  } = await supabase.auth.getUser()
 
   const profile: Database["public"]["Tables"]["profiles"]["Row"] | null =
     data.profile
 
-  return { supabase, session, profile }
+  return { supabase, user, profile }
 }
 
