@@ -7,12 +7,11 @@ export default defineConfig({
     sveltekit(),
 
     VitePWA({
-      strategies: 'generateSW',          // use generateSW strategy
-      registerType: 'autoUpdate',        // keep your existing registerType
+      strategies: 'generateSW',
+      registerType: 'autoUpdate',
       devOptions: {
         enabled: true,
-        type: 'module',
-        outDir: 'static'                 // ← write SW & runtime into static/
+        type: 'module'
       },
 
       includeAssets: [
@@ -27,46 +26,42 @@ export default defineConfig({
         description: 'A modern SvelteKit template with PWA support',
         theme_color: '#ffffff',
         icons: [
-          { src: 'icons/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'icons/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+          {
+            src: 'icons/pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
           {
             src: 'icons/pwa-512x512.png',
             sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
+            type: 'image/png'
           }
         ]
       },
 
       workbox: {
-        globDirectory: 'static',          // ← point at static/
+        globDirectory: 'static',
         globPatterns: [
-          '**/*.{js,mjs,css,html,ico,png,svg,json,map}'
+          '**/*.{js,mjs,css,html,ico,png,svg,json}'
         ],
         globIgnores: [
           '**/node_modules/**/*',
-          'sw.js',                         // your main SW
-          'workbox-*.js',                  // runtime chunks
+          '**/sw.js',
+          '**/workbox-*.js',
           '**/manifest.webmanifest'
         ],
-
-        navigateFallback: '/',
+        navigateFallback: undefined,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
             options: {
               cacheName: 'google-fonts-cache',
-              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365
+              },
               cacheableResponse: { statuses: [0, 200] }
-            }
-          },
-          {
-            urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts-webfonts',
-              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 }
             }
           }
         ]
