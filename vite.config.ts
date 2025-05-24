@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import type { PluginOption } from 'vite';
 
 export default defineConfig({
   plugins: [
@@ -66,7 +67,7 @@ export default defineConfig({
           }
         ]
       }
-    })
+    }) as PluginOption
   ],
 
   server: {
