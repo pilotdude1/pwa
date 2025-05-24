@@ -12,7 +12,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true,
-        type: 'module'
+        type: 'module',
+        navigateFallback: undefined
       },
 
       includeAssets: [
@@ -41,7 +42,7 @@ export default defineConfig({
       },
 
       workbox: {
-        globDirectory: 'dev-dist',
+        globDirectory: '.svelte-kit/output/client',
         globPatterns: ['**/*.{js,mjs,css,html,ico,png,svg,json}'],
         globIgnores: [
           '**/node_modules/**/*',
